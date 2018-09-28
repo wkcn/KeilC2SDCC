@@ -7,9 +7,10 @@ fname = sys.argv[1]
 out = sys.argv[2] 
 print ('convert {} to {}'.format(fname, out))
 
-mapping_fname = 'mapping.pkg'
+mapping_fname = os.path.join(os.path.dirname(__file__), 'mapping.pkg')
 if os.path.exists(mapping_fname):
     mapping = pickle.load(open(mapping_fname, 'rb'))
+    print (mapping)
 else:
     mapping = dict()
 
@@ -33,4 +34,4 @@ for line in open(fname).readlines():
         else:
             fout.write(line + '\n')
 
-open(mapping_fname, 'wb').write(pickle.dumps(mapping))
+open(mapping_fname, 'wb').write(pickle.dumps(mapping, protocol=2))
